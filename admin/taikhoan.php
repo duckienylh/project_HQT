@@ -20,7 +20,7 @@ include 'headerad.php';
                             <i class="fas fa-user-plus"></i> Thêm tài khoản
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade modal-them" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -30,27 +30,27 @@ include 'headerad.php';
                                     <form method="POST">
                                         <div class="modal-body">
                                             <div class="mb-3">
-                                                <label for="subjectname" class="form-label">Tên tài khoản</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="tkname" class="form-label">Tên tài khoản</label>
+                                                <input type="text" class="form-control" name="tkname" id="tkname" >
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="subjectid" class="form-label">Mã nhân viên</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="nvid" class="form-label">Mã Nhân Viên</label>
+                                                <input type="text" class="form-control" name="nvid" id="nvid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="subjectname" class="form-label">Mật Khẩu</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="pass" class="form-label">Mật Khẩu</label>
+                                                <input type="text" class="form-control" name="pass" id="pass" >
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="subjectid" class="form-label">level tài khoản</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="level" class="form-label">level tài khoản</label>
+                                                <input type="text" class="form-control" name="level" id="level" >
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button type="button" class="btn btn-primary btn-them" data-bs-dismiss="modal">Thêm</button>
+                                            <button type="submit" class="btn btn-primary " name="btnSave">Thêm</button>
                                         </div>
                                     </form>
                                 </div>
@@ -59,7 +59,7 @@ include 'headerad.php';
                     </div>
                 </div>
 
-                <div class="modal modal-sc" tabindex="-1">
+                <!-- <div class="modal modal-sc" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -75,7 +75,7 @@ include 'headerad.php';
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <table class="table table-hover table-striped " id="example">
                     <thead>
@@ -89,7 +89,7 @@ include 'headerad.php';
                     <tbody>
                         <?php
                         include 'config.php';
-                        $sql = "SELECT `TEN_TK`, taikhoan.MANV, `TENNV` , `NGAYTAO` FROM `taikhoan`,nhanvien where taikhoan.manv = nhanvien.manv";
+                        $sql = "SELECT `TEN_TK`, taikhoan.MANV, `TENNV` , `NGAYTAO` FROM `taikhoan`,`nhanvien` where taikhoan.MANV = nhanvien.MANV ";
                         $result = mysqli_query($conn, $sql);
 
                         if (mysqli_num_rows($result) > 0) {
@@ -101,7 +101,7 @@ include 'headerad.php';
                                     <td><?php echo $row['NGAYTAO']; ?></td>
                                     <td>
                                         
-                                    <a type="submit" class="btn btn-danger btn-mydel" href="edit-teacher.php?id=<?php echo  $row['TEN_TK'] ?>"><i class="fas fa-user-slash"></i></a>
+                                    <a type="submit" class="btn btn-danger btn-mydel" href="process_del_tk.php?id=<?php echo  $row['TEN_TK'] ?>"><i class="fas fa-user-slash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -122,10 +122,13 @@ include 'headerad.php';
 </script>
 <?php
 if (isset($_POST['btnSave'])) {
-    $subjectid = $_POST['subjectid'];
-    $subjectname = $_POST['subjectname'];
-    $sql2 = "INSERT INTO `subjects`(`sb_id`, `sb_name`)
-    VALUES ('$subjectid','$subjectname') ";
+    $tkname = $_POST['tkname'];
+    $nvid = $_POST['nvid'];
+    $pass = $_POST['pass'];
+    $level = $_POST['level'];
+   
+    $sql2 = "INSERT INTO `taikhoan`(`TEN_TK`, `MANV`, `MATKHAU`, `level_TK`) 
+    VALUES ('$tkname','$nvid','$pass','$level') ";
 
     $result = mysqli_query($conn, $sql2);
 

@@ -22,7 +22,7 @@ include 'headerad.php';
 
 
                         <!-- Modal -->
-                        <div class="modal fade modal-them" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -33,30 +33,30 @@ include 'headerad.php';
                                         <div class="modal-body">
 
                                             <div class="mb-3">
-                                                <label for="classid" class="form-label">Mã khách hàng</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="khid" class="form-label">Mã khách hàng</label>
+                                                <input type="text" class="form-control" name="khid" id="khid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="classname" class="form-label">Tên khách hàng</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="khname" class="form-label">Tên khách hàng</label>
+                                                <input type="text" class="form-control" name="khname" id="khname" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="teachid" class="form-label">Địa chỉ</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="khaddress" class="form-label">Địa chỉ</label>
+                                                <input type="text" class="form-control" name="khaddress" id="khaddress" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="classname" class="form-label">Số điện thoại</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="khphone" class="form-label">Số điện thoại</label>
+                                                <input type="text" class="form-control" name="khphone" id="khphone" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="teachid" class="form-label">Email</label>
-                                                <input type="text" class="form-control" name="" id="" >
+                                                <label for="khmail" class="form-label">Email</label>
+                                                <input type="text" class="form-control" name="khmail" id="khmail" >
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                             <!-- <button type="button" class="btn btn-primary btn-them" name="btnSave">Thêm</button> -->
-                                            <button type="button" class="btn btn-primary btn-them" data-bs-dismiss="modal">Thêm</button>
+                                            <button type="submit" class="btn btn-primary" name="btnSave">Thêm</button>
                                         </div>
                                     </form>
                                 </div>
@@ -64,7 +64,7 @@ include 'headerad.php';
                         </div>
 
 
-                        <div class="modal modal-sc" tabindex="-1">
+                        <!-- <div class="modal modal-sc" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -80,7 +80,7 @@ include 'headerad.php';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                     </div>
@@ -112,8 +112,8 @@ include 'headerad.php';
                                     <td><?php echo $row['SDTKH']; ?></td>
                                     <td><?php echo $row['EMAIL']; ?></td>
                                     <td>
-                                        <a class="btn btn-warning" href="edit-teacher.php?id=<?php echo  $row['MAKH'] ?>"><i class="fas fa-user-edit"></i></a>
-                                        <a type="submit" class="btn btn-danger btn-mydel" href="edit-teacher.php?id=<?php echo  $row['MAKH'] ?>"><i class="fas fa-user-slash"></i></a>
+                                        <a class="btn btn-warning" href="sua_khachhang.php?id=<?php echo  $row['MAKH'] ?>"><i class="fas fa-user-edit"></i></a>
+                                        <a type="submit" class="btn btn-danger btn-mydel" href="process_del_kh.php?id=<?php echo  $row['MAKH'] ?>"><i class="fas fa-user-slash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -134,11 +134,13 @@ include 'headerad.php';
 </script>
 <?php
 if (isset($_POST['btnSave'])) {
-    $classid = $_POST['classid'];
-    $classname = $_POST['classname'];
-    $teachid = $_POST['teachid'];
-    $sql2 = "INSERT INTO `classes`(`class_id`, `class_name`, `teach_id`)
-     VALUES ('$classid','$classname','$teachid') ";
+    $khid = $_POST['khid'];
+    $khname = $_POST['khname'];
+    $khaddress = $_POST['khaddress'];
+    $khphone = $_POST['khphone'];
+    $khmail = $_POST['khmail'];
+    $sql2 = "INSERT INTO `khachhang`(`MAKH`, `TENKH`, `DIACHI`, `SDTKH`, `EMAIL`) 
+    VALUES ('$khid','$khname','$khaddress','$khphone','$khmail') ";
 
     $result = mysqli_query($conn, $sql2);
 

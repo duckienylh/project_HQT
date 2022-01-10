@@ -20,7 +20,7 @@ include 'headerad.php';
                             <i class="fas fa-user-plus"></i> Thêm sản phẩm
                         </button>
                         <!-- Modal -->
-                        <div class="modal fade modal-them" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -31,31 +31,35 @@ include 'headerad.php';
                                         <div class="modal-body">
 
                                             <div class="mb-3">
-                                                <label for="subjectid" class="form-label">Mã sản phẩm</label>
-                                                <input type="text" class="form-control" name="subjectid" id="subjectid" >
+                                                <label for="spid" class="form-label">Mã sản phẩm</label>
+                                                <input type="text" class="form-control" name="spid" id="spid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="subjectname" class="form-label">Tên sản phẩm</label>
-                                                <input type="text" class="form-control" name="subjectname" id="subjectname" >
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="subjectid" class="form-label">Giá bán</label>
-                                                <input type="text" class="form-control" name="subjectid" id="subjectid" >
+                                                <label for="spnameid" class="form-label">Mã Loại sản phẩm</label>
+                                                <input type="text" class="form-control" name="spnameid" id="spnameid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="subjectname" class="form-label">Giá nhập</label>
-                                                <input type="text" class="form-control" name="subjectname" id="subjectname" >
+                                                <label for="spname" class="form-label">Tên sản phẩm</label>
+                                                <input type="text" class="form-control" name="spname" id="spname" >
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="subjectid" class="form-label">Mô tả</label>
-                                                <input type="text" class="form-control" name="subjectid" id="subjectid" >
+                                                <label for="price" class="form-label">Giá bán</label>
+                                                <input type="text" class="form-control" name="price" id="price" >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="gianhap" class="form-label">Giá nhập</label>
+                                                <input type="text" class="form-control" name="gianhap" id="gianhap" >
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="describe" class="form-label">Mô tả</label>
+                                                <input type="text" class="form-control" name="describe" id="describe" >
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                                            <button type="button" class="btn btn-primary btn-them" data-bs-dismiss="modal">Thêm</button>
+                                            <button type="submit" class="btn btn-primary " name="btnSave">Thêm</button>
                                         </div>
                                     </form>
                                 </div>
@@ -64,7 +68,7 @@ include 'headerad.php';
                     </div>
                 </div>
 
-                <div class="modal modal-sc" tabindex="-1">
+                <!-- <div class="modal modal-sc" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -80,7 +84,7 @@ include 'headerad.php';
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <table class="table table-hover table-striped " id="example">
                     <thead>
@@ -111,8 +115,8 @@ include 'headerad.php';
                                     <td><?php echo $row['GIANHAP']; ?></td>
                                     <td><?php echo $row['MOTA']; ?></td>
                                     <td>
-                                        <a class="btn btn-warning" href="edit-teacher.php?id=<?php echo  $row['MADT'] ?>"><i class="fas fa-user-edit"></i></a>
-                                        <a type="submit" class="btn btn-danger btn-mydel" href="edit-teacher.php?id=<?php echo  $row['MADT'] ?>"><i class="fas fa-user-slash"></i></a>
+                                        <a class="btn btn-warning" href="sua_sanpham.php?id=<?php echo  $row['MADT'] ?>"><i class="fas fa-user-edit"></i></a>
+                                        <a type="submit" class="btn btn-danger btn-mydel" href="process_del_sp.php?id=<?php echo  $row['MADT'] ?>"><i class="fas fa-user-slash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -133,10 +137,14 @@ include 'headerad.php';
 </script>
 <?php
 if (isset($_POST['btnSave'])) {
-    $subjectid = $_POST['subjectid'];
-    $subjectname = $_POST['subjectname'];
-    $sql2 = "INSERT INTO `subjects`(`sb_id`, `sb_name`)
-    VALUES ('$subjectid','$subjectname') ";
+    $spid = $_POST['spid'];
+    $spnameid = $_POST['spnameid'];
+    $spname = $_POST['spname'];
+    $price = $_POST['price'];
+    $gianhap = $_POST['gianhap'];
+    $describe = $_POST['describe'];
+    $sql2 = "INSERT INTO `dienthoai`(`MADT`, `MALOAIDT`, `TENDT`, `GIABAN`, `GIANHAP`, `MOTA`) 
+    VALUES ('$spid','$spnameid','$spname','$price','$gianhap','$describe') ";
 
     $result = mysqli_query($conn, $sql2);
 

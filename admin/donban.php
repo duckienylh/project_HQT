@@ -22,7 +22,7 @@ include 'headerad.php';
 
 
                         <!-- Modal -->
-                        <div class="modal fade modal-them" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -33,26 +33,30 @@ include 'headerad.php';
                                         <div class="modal-body">
 
                                             <div class="mb-3">
-                                                <label for="classid" class="form-label">Mã đơn bán</label>
-                                                <input type="text" class="form-control" name="classid" id="classid" >
+                                                <label for="dbid" class="form-label">Mã đơn bán</label>
+                                                <input type="text" class="form-control" name="dbid" id="dbid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="classname" class="form-label">Mã khách hàng</label>
-                                                <input type="text" class="form-control" name="classname" id="classname" >
+                                                <label for="khid" class="form-label">Mã khách hàng</label>
+                                                <input type="text" class="form-control" name="khid" id="khid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="teachid" class="form-label">Mã nhân viên</label>
-                                                <input type="text" class="form-control" name="teachid" id="teachid" >
+                                                <label for="nvid" class="form-label">Mã nhân viên</label>
+                                                <input type="text" class="form-control" name="nvid" id="nvid" >
                                             </div>
                                             <div class="mb-3">
-                                                <label for="teachid" class="form-label">Tổng tiền</label>
-                                                <input type="text" class="form-control" name="teachid" id="teachid" >
+                                                <label for="tinhtien" class="form-label">Tổng tiền</label>
+                                                <input type="text" class="form-control" name="tinhtien" id="tinhtien" >
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="credate" class="form-label">Ngày Tạo</label>
+                                                <input type="date" class="form-control" name="credate" id="credate" >
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                             <!-- <button type="button" class="btn btn-primary btn-them" name="btnSave">Thêm</button> -->
-                                            <button type="button" class="btn btn-primary btn-them" data-bs-dismiss="modal">Thêm</button>
+                                            <button type="submit" class="btn btn-primary" name="btnSave" >Thêm</button>
                                         </div>
                                     </form>
                                 </div>
@@ -60,7 +64,7 @@ include 'headerad.php';
                         </div>
 
 
-                        <div class="modal modal-sc" tabindex="-1">
+                        <!-- <div class="modal modal-sc" tabindex="-1">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -76,7 +80,7 @@ include 'headerad.php';
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
 
                     </div>
@@ -109,8 +113,8 @@ include 'headerad.php';
                                     <td><?php echo $row['TONGTIEN']; ?></td>
                                     <td><?php echo $row['NGAYTAO']; ?></td>
                                     <td>
-                                        <a class="btn btn-warning" href="edit-teacher.php?id=<?php echo  $row['MAHD'] ?>"><i class="fas fa-user-edit"></i></a>
-                                        <a type="submit" class="btn btn-danger btn-mydel" href="edit-teacher.php?id=<?php echo  $row['MAHD'] ?>"><i class="fas fa-user-slash"></i></a>
+                                        <a class="btn btn-warning" href="sua_donban.php?id=<?php echo  $row['MAHD'] ?>"><i class="fas fa-user-edit"></i></a>
+                                        <a type="submit" class="btn btn-danger btn-mydel" href="process_del_db.php?id=<?php echo  $row['MAHD'] ?>"><i class="fas fa-user-slash"></i></a>
                                     </td>
                                 </tr>
                         <?php
@@ -131,11 +135,13 @@ include 'headerad.php';
 </script>
 <?php
 if (isset($_POST['btnSave'])) {
-    $classid = $_POST['classid'];
-    $classname = $_POST['classname'];
-    $teachid = $_POST['teachid'];
-    $sql2 = "INSERT INTO `classes`(`class_id`, `class_name`, `teach_id`)
-     VALUES ('$classid','$classname','$teachid') ";
+    $dbid = $_POST['dbid'];
+    $khid = $_POST['khid'];
+    $nvid = $_POST['nvid'];
+    $tinhtien = $_POST['tinhtien'];
+    $credate = $_POST['credate'];
+    $sql2 = "INSERT INTO `hoadon`(`MAHD`, `MAKH`, `MANV`, `TONGTIEN`, `NGAYTAO`) 
+    VALUES ('$dbid','$khid','$nvid','$tinhtien','$credate') ";
 
     $result = mysqli_query($conn, $sql2);
 
